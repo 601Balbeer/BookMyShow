@@ -90,40 +90,40 @@ public class HallService{
 
 //         Notify - Creator and creator manager that we have created hall
 
-        Notification notification = Notification.builder()
-                .notificationId(SystemUtility.generate("NOTIFICATION"))
-                .notificationChannel(NotificationChannel.MAIL)
-                .receipts(List.of(creator, creator.getManager()))
-                .notificationPriority(NotificationPriority.URGENT)
-                .notificationStatus(NotificationStatus.DRAFT)
-                .templateId(NotificationTemplateConfig.HALL_REGISTRATION_TEMPLATE_ID)
-                .createdBy("system")
-                .updatedBy("system")
-                .build();
-
-        NotificationContext notificationContext = new NotificationContext();
-        Map<String, String> context = notificationContext.getEmailContext();
-
-        context.put("theaterName", theater.getTheaterName());
-        context.put("theaterCode", theater.getTheaterCode());
-        context.put("city", theater.getCity());
-        context.put("state", theater.getState());
-
-        context.put("hallName", hall.getHallName());
-        context.put("hallCode", hall.getHallCode());
-        context.put("floorNumber", hall.getFloorNumber().toString());
-        context.put("totalSeats", hall.getTotalSeats().toString());
-        context.put("hallType", hall.getHallType().toString());
-
-        context.put("wheelchairAccessible", hall.isWheelchairAccessible() ? "TRUE" : "FALSE");
-        context.put("reclinerSeatsAvailable", hall.isReclinerSeatsAvailable() ? "TRUE" : "FALSE");
-        context.put("dolbyAtmosSupported", hall.isDolbyAtmosSupported() ? "TRUE" : "FALSE");
-        context.put("threeDSupported", hall.isThreeDSupported()? "TRUE" : "FALSE");
-        context.put("imaxSupported", hall.isImaxSupported()? "TRUE" : "FALSE");
-
-        executorService.submit(() -> {
-            notificationService.sendNotification(notification, notificationContext);
-        });
+//        Notification notification = Notification.builder()
+//                .notificationId(SystemUtility.generate("NOTIFICATION"))
+//                .notificationChannel(NotificationChannel.MAIL)
+//                .receipts(List.of(creator, creator.getManager()))
+//                .notificationPriority(NotificationPriority.URGENT)
+//                .notificationStatus(NotificationStatus.DRAFT)
+//                .templateId(NotificationTemplateConfig.HALL_REGISTRATION_TEMPLATE_ID)
+//                .createdBy("system")
+//                .updatedBy("system")
+//                .build();
+//
+//        NotificationContext notificationContext = new NotificationContext();
+//        Map<String, String> context = notificationContext.getEmailContext();
+//
+//        context.put("theaterName", theater.getTheaterName());
+//        context.put("theaterCode", theater.getTheaterCode());
+//        context.put("city", theater.getCity());
+//        context.put("state", theater.getState());
+//
+//        context.put("hallName", hall.getHallName());
+//        context.put("hallCode", hall.getHallCode());
+//        context.put("floorNumber", hall.getFloorNumber().toString());
+//        context.put("totalSeats", hall.getTotalSeats().toString());
+//        context.put("hallType", hall.getHallType().toString());
+//
+//        context.put("wheelchairAccessible", hall.isWheelchairAccessible() ? "TRUE" : "FALSE");
+//        context.put("reclinerSeatsAvailable", hall.isReclinerSeatsAvailable() ? "TRUE" : "FALSE");
+//        context.put("dolbyAtmosSupported", hall.isDolbyAtmosSupported() ? "TRUE" : "FALSE");
+//        context.put("threeDSupported", hall.isThreeDSupported()? "TRUE" : "FALSE");
+//        context.put("imaxSupported", hall.isImaxSupported()? "TRUE" : "FALSE");
+//
+//        executorService.submit(() -> {
+//            notificationService.sendNotification(notification, notificationContext);
+//        });
         log.info("register hall completed");
         return hall;
     }
